@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { AuthModule } from './features/auth/auth-module';
 import { Dashboard } from './features/dashboard/dashboard';
+import { ProfileModule } from './features/profile/profile-module';
 
 @NgModule({
   declarations: [App, Dashboard],
-  imports: [BrowserModule, AppRoutingModule, AuthModule],
+  imports: [BrowserModule, AppRoutingModule, AuthModule, ProfileModule],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
 })

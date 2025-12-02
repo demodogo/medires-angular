@@ -10,7 +10,7 @@ type AppointmentItem = {
   statusVariant: AppointmentStatusVariant;
 };
 
-export type ActionVariant = 'primary' | 'outline';
+export type ActionVariant = 'primary' | 'outline' | 'ghost';
 
 type DashboardAction = {
   label: string;
@@ -98,9 +98,9 @@ export const dashboardConfig: Record<
         variant: 'outline',
       },
       {
-        label: 'Configuración',
-        route: '/configuracion',
-        variant: 'outline',
+        label: 'Mi perfil',
+        route: '/perfil',
+        variant: 'ghost',
       },
     ],
   },
@@ -149,9 +149,9 @@ export const dashboardConfig: Record<
         variant: 'outline',
       },
       {
-        label: 'Configuración',
-        route: '/configuracion',
-        variant: 'outline',
+        label: 'Mi perfil',
+        route: '/perfil',
+        variant: 'ghost',
       },
     ],
   },

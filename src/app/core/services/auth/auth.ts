@@ -58,6 +58,15 @@ export class Auth {
     this.saveUserToLS(user);
   }
 
+  updateCurrentUser(updatedUser: User): void {
+    const currentUser = this.currentUserSubject.value;
+    if (!currentUser) return;
+
+    const updated = { ...currentUser, ...updatedUser };
+    this.currentUserSubject.next(updated);
+    this.saveUserToLS(updated);
+  }
+
   logout(): void {
     this.currentUserSubject.next(null);
     this.saveUserToLS(null);

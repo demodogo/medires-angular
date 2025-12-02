@@ -1,0 +1,157 @@
+<div class="min-h-screen bg-[#f2f2f2] px-4 py-8">
+    <div class="max-w-3xl mx-auto space-y-6">
+        <div class="flex items-center justify-between gap-4">
+            <div>
+                <p class="text-xs font-medium text-[#3469cd] uppercase tracking-wide">
+                    Configuración
+                </p>
+                <h1 class="text-2xl font-bold text-[#0e245a]">
+                    Mi perfil
+                </h1>
+                <p class="text-sm text-[#0e245a]/70 mt-1">
+                    Actualiza tus datos personales y de contacto.
+                </p>
+            </div>
+
+            <a
+                    routerLink="/dashboard"
+                    class="text-xs font-medium text-[#3469cd] hover:underline"
+            >
+                Volver al dashboard
+            </a>
+        </div>
+
+        <div
+                class="bg-white rounded-2xl shadow-lg shadow-[#0e245a]/5 border border-[#3469cd]/10 p-6 sm:p-8"
+        >
+            <form
+                    [formGroup]="profileForm"
+                    (ngSubmit)="onSubmit()"
+                    class="space-y-4"
+            >
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-[#0e245a]" for="name">
+                        Nombre
+                    </label>
+                    <input
+                            id="name"
+                            type="text"
+                            formControlName="name"
+                            class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
+                   focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                            placeholder="Tu nombre"
+                    />
+                    <p
+                            *ngIf="name?.touched && name?.invalid"
+                            class="text-xs text-red-500 mt-1"
+                    >
+            <span *ngIf="name?.errors?.['required']">
+              El nombre es obligatorio.
+            </span>
+                        <span *ngIf="name?.errors?.['minlength']">
+              El nombre debe tener al menos 3 caracteres.
+            </span>
+                    </p>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-[#0e245a]" for="lastName">
+                        Apellido
+                    </label>
+                    <input
+                            id="lastName"
+                            type="text"
+                            formControlName="lastName"
+                            class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
+                   focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                            placeholder="Tu apellido"
+                    />
+                    <p
+                            *ngIf="lastName?.touched && lastName?.invalid"
+                            class="text-xs text-red-500 mt-1"
+                    >
+            <span *ngIf="lastName?.errors?.['required']">
+              El apellido es obligatorio.
+            </span>
+                        <span *ngIf="lastName?.errors?.['minlength']">
+              El apellido debe tener al menos 3 caracteres.
+            </span>
+                    </p>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-[#0e245a]" for="email">
+                        Correo electrónico
+                    </label>
+                    <input
+                            id="email"
+                            type="email"
+                            formControlName="email"
+                            class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
+                   focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                            placeholder="tucorreo@medireserva.cl"
+                    />
+                    <p
+                            *ngIf="email?.touched && email?.invalid"
+                            class="text-xs text-red-500 mt-1"
+                    >
+            <span *ngIf="email?.errors?.['required']">
+              El correo es obligatorio.
+            </span>
+                        <span *ngIf="email?.errors?.['email']">
+              Ingresa un correo válido.
+            </span>
+                    </p>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-[#0e245a]" for="password">
+                        Nueva contraseña
+                    </label>
+                    <input
+                            id="password"
+                            type="password"
+                            formControlName="password"
+                            class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
+                   focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                            placeholder="Deja en blanco para no cambiarla"
+                    />
+                    <p class="text-[11px] text-[#0e245a]/50 mt-1">
+                        Este campo es opcional.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-[#0e245a]" for="password">
+                        Repetir contraseña
+                    </label>
+                    <input
+                            id="passwordRepeat"
+                            type="password"
+                            formControlName="passwordRepeat"
+                            class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
+                   focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                            placeholder="Deja en blanco para no cambiarla"
+                    />
+                    <p class="text-[11px] text-[#0e245a]/50 mt-1">
+                        Este campo es opcional.
+                    </p>
+                </div>
+
+                <div class="pt-2 flex items-center justify-between gap-4">
+                    <button
+                            type="submit"
+                            [disabled]="profileForm.invalid"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl
+                   bg-gradient-to-r from-[#3469cd] to-[#00d1d1]
+                   px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#3469cd]/30
+                   hover:shadow-lg hover:brightness-105 active:scale-[0.99] transition
+                   disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                        <span >Guardar cambios</span>
+                    </button>
+
+                    <p *ngIf="saveMessage" class="text-xs text-primary">
+                        {{ saveMessage }}
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ import { Login } from '@/app/features/auth/login/login';
 import { Dashboard } from '@/app/features/dashboard/dashboard';
 import { authGuard } from '@/app/core/guards/auth-guard';
 import { loginGuard } from '@/app/core/guards/login-guard';
+import { Profile } from '@/app/features/profile/profile';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: Dashboard,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'perfil',
+    component: Profile,
     canActivate: [authGuard],
   },
   {

@@ -73,6 +73,7 @@ export class Dashboard implements OnInit, OnDestroy {
   private variantClasses: Record<ActionVariant, string> = {
     primary: 'bg-primary text-white shadow-sm hover:brightness-110',
     outline: 'border border-primary/40 text-[#3469cd] bg-white hover:bg-[#3469cd]/5',
+    ghost: 'border-2 border-primary/40 text-[#3469cd]  hover:bg-white',
   };
 
   getActionClasses(variant: ActionVariant): string {
