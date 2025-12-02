@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Patient, Patients } from '@/app/core/services/patients/patients';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { rutValidator } from '@/app/core/validators/rut.validator';
 
 @Component({
   selector: 'app-pacientes',
@@ -25,7 +26,7 @@ export class Pacientes implements OnInit, OnDestroy {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
-      rut: ['', [Validators.required, Validators.minLength(9)]],
+      rut: ['', [Validators.required, rutValidator]],
       isActive: [true],
     });
 
@@ -97,5 +98,32 @@ export class Pacientes implements OnInit, OnDestroy {
   cancelEdit(): void {
     this.editingId = null;
     this.form.reset({ isActive: true });
+  }
+
+  formatRut(rut: string): string {
+    rut = rut.replace(/\./g, '').replace(/-/g, '').toUpperCase();
+    if (rut.length <= 1) return rut;
+
+    const body = rut.slice(0, -1);
+    const dv = rut.slice(-1);
+
+    const formattedBody =
+      body
+        .split('')
+        .reverse()
+        .join('')
+        .match(/.{1,3}/g)
+        ?.join('.')
+        .split('')
+        .reverse()
+        .join('') ?? body;
+
+    return `${formattedBody}-${dv}`;
+  }
+
+  onRutInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const formatted = this.formatRut(input.value);
+    this.form.get('rut')?.setValue(formatted, { emitEvent: false });
   }
 }

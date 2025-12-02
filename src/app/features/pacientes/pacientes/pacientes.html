@@ -99,11 +99,12 @@
                         <input
                                 type="text"
                                 formControlName="rut"
+                                (input)="onRutInput($event)"
                                 class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2 text-sm outline-none
                      focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20"
                         />
-                        <p *ngIf="rut?.touched && rut?.invalid" class="text-[0.7rem] text-red-500">
-                            El RUT es obligatorio.
+                        <p *ngIf="rut?.touched && (rut?.invalid || rut?.errors?.['invalidRut'])" class="text-[0.7rem] text-red-500">
+                            RUT inválido
                         </p>
                     </div>
 
