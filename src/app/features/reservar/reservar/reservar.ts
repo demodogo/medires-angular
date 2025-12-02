@@ -3,7 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '@/app/core/models/user.model';
 import { Auth } from '@/app/core/services/auth/auth';
 import { Subscription } from 'rxjs';
-import { SPECIALTIES, SpecialtyOption } from '@/app/features/reservar/reservar/reservar.config';
+import {
+  DoctorType,
+  SPECIALTIES,
+  SpecialtyOption,
+} from '@/app/features/reservar/reservar/reservar.config';
+import { Reservations } from '@/app/core/services/reservations/reservations';
 
 type ReservationPayload = {
   patientId: number;
@@ -28,11 +33,12 @@ export class Reservar implements OnInit, OnDestroy {
   successMessage = '';
   lastReservation: ReservationPayload | null = null;
   specialties: SpecialtyOption[] = SPECIALTIES;
-  doctorsForSelected: string[] = [];
+  doctorsForSelected: DoctorType[] = [];
 
   constructor(
     private fb: FormBuilder,
     private auth: Auth,
+    private reservationService: Reservations,
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +46,8 @@ export class Reservar implements OnInit, OnDestroy {
       date: ['', [Validators.required, this.dateValidator]],
       time: ['', [Validators.required]],
       specialty: [null, [Validators.required]],
-      doctor: [null, [Validators.required]],
+      doctorId: [null, [Validators.required]],
+      doctorName: [null],
       reason: [''],
     });
 
@@ -64,8 +71,16 @@ export class Reservar implements OnInit, OnDestroy {
     return this.reservationForm.get('specialty');
   }
 
-  get doctor() {
-    return this.reservationForm.get('doctor');
+  get doctorId() {
+    return this.reservationForm.get('doctorId');
+  }
+
+  set doctorName(name: string) {
+    this.reservationForm.get('doctorName')?.setValue(name);
+  }
+
+  get doctorName() {
+    return this.reservationForm.get('doctorName')?.value;
   }
 
   get reason() {
@@ -78,7 +93,16 @@ export class Reservar implements OnInit, OnDestroy {
 
     this.doctorsForSelected = selected?.doctors ?? [];
 
-    this.doctor?.reset(null);
+    this.doctorId?.reset(null);
+  }
+
+  onDoctorChange(): void {
+    const selectedId = this.doctorId?.value as number | null;
+    const selectedDoctor = this.doctorsForSelected.find((d) => d.id === selectedId);
+
+    if (selectedDoctor) {
+      this.doctorName = selectedDoctor.name;
+    }
   }
 
   onSubmit(): void {
@@ -90,15 +114,16 @@ export class Reservar implements OnInit, OnDestroy {
     }
 
     const formValue = this.reservationForm.value;
-    this.lastReservation = {
-      patientId: this.currentUser.id,
-      patientName: `${this.currentUser.name} ${this.currentUser.lastName}`,
+    this.lastReservation = this.reservationService.createReservation({
       date: formValue.date,
+      patientId: this.currentUser.id,
       time: formValue.time,
-      doctorName: formValue.doctor,
+      patientName: `${this.currentUser.name} ${this.currentUser.lastName}`,
+      reason: formValue.reason ?? undefined,
+      doctorName: formValue.doctorName,
+      doctorId: formValue.doctorId,
       specialty: this.getSpecialtyName(formValue.specialty),
-      reason: formValue.reason ?? '',
-    };
+    });
 
     this.successMessage = 'Reserva realizada correctamente';
 

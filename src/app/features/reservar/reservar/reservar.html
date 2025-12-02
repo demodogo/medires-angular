@@ -103,8 +103,9 @@
                             Profesional
                         </label>
                         <select
-                                id="doctor"
-                                formControlName="doctor"
+                                id="doctorId"
+                                formControlName="doctorId"
+                                (change)="onDoctorChange()"
                                 class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
                      focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
                                 [disabled]="!doctorsForSelected.length"
@@ -114,13 +115,13 @@
                             </option>
                             <option
                                     *ngFor="let d of doctorsForSelected"
-                                    [ngValue]="d"
+                                    [ngValue]="d.id"
                             >
-                                {{ d }}
+                                {{ d.name }}
                             </option>
                         </select>
                         <p
-                                *ngIf="doctor?.touched && doctor?.invalid"
+                                *ngIf="doctorId?.touched && doctorId?.invalid"
                                 class="text-xs text-red-500 mt-1"
                         >
                             Debes seleccionar un profesional.

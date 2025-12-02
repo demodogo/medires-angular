@@ -28,11 +28,11 @@
                     Próximas reservas
                 </h2>
                 <span class="text-xs text-[#0e245a]/60">
-          {{ upcoming?.length || 0 }} agendadas
+          {{ upcoming.length || 0 }} agendadas
         </span>
             </div>
 
-            <div *ngIf="upcoming.length; else noUpcoming" class="space-y-3 text-sm">
+            <div *ngIf="upcoming.length > 0; else noUpcoming" class="space-y-3 text-sm">
                 <div
                         *ngFor="let r of upcoming"
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-[#0e245a]/5 last:border-b-0 pb-3 last:pb-0"
@@ -42,26 +42,52 @@
                             {{ r.date }} · {{ r.time }}
                         </p>
                         <p class="text-xs text-[#0e245a]/70">
-                            {{ r.specialty }} con {{ r.doctor }}
+                            {{ r.specialty }} con {{ r.doctorName }}
                         </p>
                     </div>
 
-                    <div class="flex items-center gap-2">
-            <span
-                    class="text-xs rounded-full px-3 py-1"
-                    [ngClass]="getStatusClasses(r.status)"
-            >
-              {{ getStatusLabel(r.status) }}
-            </span>
+                    <div class="flex  gap-2 flex-col items-start md:flex-row md:items-center">
+                          <div class="flex flex-col items-start md:items-center md:flex-row">
+                              <span class="text-xs mx-1 text-[#999]">Estado:</span>
+                                <span
+                                        class="text-xs rounded-full px-3 py-1"
+                                        [ngClass]="getStatusClasses(r.status)"
+                                >
+                              {{ getStatusLabel(r.status) }}
+                            </span>
+                              <span
+                                      *ngIf="r.status !== 'cancelada' && r.status !== 'completada' "
+                                      class="mx-2 text-[#999] hidden md:block">|</span>
+                              <span
+                                      *ngIf="r.status !== 'cancelada' && r.status !== 'completada' "
+                                      class="mx-2 text-[#999] block md:hidden">___________</span>
+                          </div>
+                        <button
+                                *ngIf="r.status === 'pendiente'"
+                                type="button"
+                                class="bg-green-600 hover:scale-95 text-xs rounded-full px-3 py-1 text-green-100 border"
+                                (click)="onConfirmReservation(r.id)"
+                        >
+                            Confirmar
+                        </button>
+                        <button
+                                *ngIf="r.status !== 'cancelada'"
+                                type="button"
+                                class="bg-red-500 hover:scale-95 text-xs rounded-full px-3 py-1 text-red-200 border"
+                                (click)="onCancelReservation(r.id)"
+                        >
+                            Cancelar
+                        </button>
                     </div>
                 </div>
             </div>
-
             <ng-template #noUpcoming>
                 <p class="text-sm text-[#0e245a]/60">
-                    No tienes reservas futuras registradas.
+                    No tienes reservas próximas.
                 </p>
             </ng-template>
+
+
         </section>
         <section
                 class="bg-white rounded-2xl shadow-lg shadow-[#0e245a]/5 border border-[#3469cd]/10 p-6 sm:p-8"
@@ -71,7 +97,7 @@
                     Historial de atenciones
                 </h2>
                 <span class="text-xs text-[#0e245a]/60">
-          {{ past?.length || 0 }} registros
+          {{ past.length || 0 }} registros
         </span>
             </div>
 
@@ -85,7 +111,7 @@
                             {{ r.date }} · {{ r.time }}
                         </p>
                         <p class="text-xs text-[#0e245a]/70">
-                            {{ r.specialty }} con {{ r.doctor }}
+                            {{ r.specialty }} con {{ r.doctorName }}
                         </p>
                     </div>
 

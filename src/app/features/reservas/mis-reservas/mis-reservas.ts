@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {
-  fakeReservations,
-  ReservationItem,
-  ReservationStatus,
-} from '@/app/features/reservas/mis-reservas/mis-reservas.config';
 import { User } from '@/app/core/models/user.model';
 import { Auth } from '@/app/core/services/auth/auth';
+import { Reservations } from '@/app/core/services/reservations/reservations';
+import {
+  Reservation,
+  ReservationStatus,
+  ReservationStatusType,
+} from '@/app/core/services/reservations/reservations.types';
 
 @Component({
   selector: 'app-mis-reservas',
@@ -16,31 +17,60 @@ import { Auth } from '@/app/core/services/auth/auth';
 })
 export class MisReservas implements OnInit, OnDestroy {
   currentUser: User | null = null;
-  private sub?: Subscription;
+  private subs = new Subscription();
 
-  upcoming: ReservationItem[] = [];
-  past: ReservationItem[] = [];
+  upcoming: Reservation[] = [];
+  past: Reservation[] = [];
 
-  constructor(private auth: Auth) {}
+  constructor(
+    private auth: Auth,
+    private reservations: Reservations,
+  ) {}
 
   ngOnInit() {
-    this.sub = this.auth.currentUser$.subscribe((user) => {
-      this.currentUser = user || null;
+    this.subs.add(
+      this.auth.currentUser$.subscribe((user) => {
+        this.currentUser = user || null;
+      }),
+    );
 
-      if (user) {
-        const today = new Date();
-
-        this.upcoming = fakeReservations.filter((r) => new Date(r.date) >= today);
-        this.past = fakeReservations.filter((r) => new Date(r.date) < today);
-      }
-    });
+    this.subs.add(
+      this.reservations.reservation$.subscribe(() => {
+        this.updateLists();
+      }),
+    );
   }
 
   ngOnDestroy() {
-    this.sub?.unsubscribe();
+    this.subs?.unsubscribe();
   }
 
-  getStatusLabel(status: ReservationStatus): string {
+  private updateLists() {
+    const today = new Date();
+    let all: Reservation[] = [];
+    if (this.currentUser) {
+      all = this.reservations.getReservationsForPatient(this.currentUser.id);
+      this.upcoming = all.filter((r) => new Date(r.date) >= today);
+      this.past = all.filter((r) => new Date(r.date) < today);
+      return;
+    }
+
+    this.upcoming = [];
+    this.past = [];
+  }
+
+  onCancelReservation(id: number): void {
+    if (!this.currentUser) return;
+    this.reservations.cancelReservation(id);
+    this.updateLists();
+  }
+
+  onConfirmReservation(id: number): void {
+    if (!this.currentUser) return;
+    this.reservations.updateStatus(id, ReservationStatus.confirmada);
+    this.updateLists();
+  }
+  getStatusLabel(status: ReservationStatusType): string {
     switch (status) {
       case 'confirmada':
         return 'Confirmada';
@@ -53,7 +83,7 @@ export class MisReservas implements OnInit, OnDestroy {
     }
   }
 
-  getStatusClasses(status: ReservationStatus): string {
+  getStatusClasses(status: ReservationStatusType): string {
     switch (status) {
       case 'confirmada':
         return 'bg-[#3469cd]/10 text-[#3469cd] border';

@@ -7,5 +7,6 @@ import { SharedModule } from '@/app/shared/shared.module';
 @NgModule({
   declarations: [Dashboard],
   imports: [CommonModule, RouterModule, SharedModule],
+  exports: [Dashboard],
 })
 export class DashboardModule {}
