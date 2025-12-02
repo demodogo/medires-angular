@@ -7,10 +7,11 @@ import { AuthModule } from './features/auth/auth-module';
 import { Dashboard } from './features/dashboard/dashboard';
 import { ProfileModule } from './features/profile/profile-module';
 import { ReservasModule } from './features/reservas/reservas-module';
+import { ReservarModule } from './features/reservar/reservar-module';
 
 @NgModule({
   declarations: [App, Dashboard],
-  imports: [BrowserModule, AppRoutingModule, AuthModule, ProfileModule, ReservasModule],
+  imports: [BrowserModule, AppRoutingModule, AuthModule, ProfileModule, ReservasModule, ReservarModule],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
 })
