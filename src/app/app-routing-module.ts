@@ -5,6 +5,8 @@ import { Dashboard } from '@/app/features/dashboard/dashboard';
 import { authGuard } from '@/app/core/guards/auth-guard';
 import { loginGuard } from '@/app/core/guards/login-guard';
 import { Profile } from '@/app/features/profile/profile';
+import { MisReservas } from '@/app/features/reservas/mis-reservas/mis-reservas';
+import { roleGuard } from '@/app/core/guards/role-guard';
 
 const routes: Routes = [
   {
@@ -26,6 +28,11 @@ const routes: Routes = [
     path: 'perfil',
     component: Profile,
     canActivate: [authGuard],
+  },
+  {
+    path: 'mis-reservas',
+    component: MisReservas,
+    canActivate: [authGuard, roleGuard('patient')],
   },
   {
     path: '**',

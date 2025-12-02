@@ -68,7 +68,7 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   private baseButtonClass =
-    'inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition';
+    'inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition hover:scale-95';
 
   private variantClasses: Record<ActionVariant, string> = {
     primary: 'bg-primary text-white shadow-sm hover:brightness-110',

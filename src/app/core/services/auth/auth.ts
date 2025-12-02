@@ -73,7 +73,8 @@ export class Auth {
   }
 
   hasRole(role: Role): boolean {
-    return this.currentUserSubject.value?.role === role;
+    const user = this.currentUserSubject.value;
+    return !!user && user.role === role;
   }
 
   isLoggedIn(): boolean {

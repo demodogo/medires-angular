@@ -1,0 +1,107 @@
+<div class="min-h-screen bg-[#f2f2f2] px-4 py-8">
+    <div class="max-w-5xl mx-auto space-y-6">
+        <div class="flex items-center justify-between gap-4">
+            <div>
+                <p class="text-xs font-medium text-[#3469cd] uppercase tracking-wide">
+                    Reservas
+                </p>
+                <h1 class="text-2xl font-bold text-[#0e245a]">
+                    Mis reservas
+                </h1>
+                <p class="text-sm text-[#0e245a]/70 mt-1">
+                    Revisa tus próximas atenciones y el historial de consultas.
+                </p>
+            </div>
+
+            <a
+                    routerLink="/dashboard"
+                    class="text-xs font-medium text-[#3469cd] hover:underline"
+            >
+                Volver al dashboard
+            </a>
+        </div>
+        <section
+                class="bg-white rounded-2xl shadow-lg shadow-[#0e245a]/5 border border-[#3469cd]/10 p-6 sm:p-8"
+        >
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-[#0e245a]">
+                    Próximas reservas
+                </h2>
+                <span class="text-xs text-[#0e245a]/60">
+          {{ upcoming?.length || 0 }} agendadas
+        </span>
+            </div>
+
+            <div *ngIf="upcoming.length; else noUpcoming" class="space-y-3 text-sm">
+                <div
+                        *ngFor="let r of upcoming"
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-[#0e245a]/5 last:border-b-0 pb-3 last:pb-0"
+                >
+                    <div>
+                        <p class="font-medium text-[#0e245a]">
+                            {{ r.date }} · {{ r.time }}
+                        </p>
+                        <p class="text-xs text-[#0e245a]/70">
+                            {{ r.specialty }} con {{ r.doctor }}
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+            <span
+                    class="text-xs rounded-full px-3 py-1"
+                    [ngClass]="getStatusClasses(r.status)"
+            >
+              {{ getStatusLabel(r.status) }}
+            </span>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #noUpcoming>
+                <p class="text-sm text-[#0e245a]/60">
+                    No tienes reservas futuras registradas.
+                </p>
+            </ng-template>
+        </section>
+        <section
+                class="bg-white rounded-2xl shadow-lg shadow-[#0e245a]/5 border border-[#3469cd]/10 p-6 sm:p-8"
+        >
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-[#0e245a]">
+                    Historial de atenciones
+                </h2>
+                <span class="text-xs text-[#0e245a]/60">
+          {{ past?.length || 0 }} registros
+        </span>
+            </div>
+
+            <div *ngIf="past.length; else noPast" class="space-y-3 text-sm">
+                <div
+                        *ngFor="let r of past"
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-[#0e245a]/5 last:border-b-0 pb-3 last:pb-0"
+                >
+                    <div>
+                        <p class="font-medium text-[#0e245a]">
+                            {{ r.date }} · {{ r.time }}
+                        </p>
+                        <p class="text-xs text-[#0e245a]/70">
+                            {{ r.specialty }} con {{ r.doctor }}
+                        </p>
+                    </div>
+                    <span
+                            class="text-xs rounded-full px-3 py-1"
+                            [ngClass]="getStatusClasses(r.status)"
+                    >
+            {{ getStatusLabel(r.status) }}
+          </span>
+                </div>
+            </div>
+
+            <ng-template #noPast>
+                <p class="text-sm text-[#0e245a]/60">
+                    Aún no tienes historial de atenciones.
+                </p>
+            </ng-template>
+        </section>
+    </div>
+</div>
