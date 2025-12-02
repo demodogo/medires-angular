@@ -31,7 +31,6 @@ export const dashboardConfig: Record<
     appointmentsTitle: string;
     appointmentsLabel: string;
     appointments: AppointmentItem[];
-    actions: DashboardAction[];
   }
 > = {
   admin: {
@@ -86,23 +85,6 @@ export const dashboardConfig: Record<
         statusVariant: 'danger',
       },
     ],
-    actions: [
-      {
-        label: 'Ver agenda completa',
-        route: '/admin/agenda',
-        variant: 'primary',
-      },
-      {
-        label: 'Mis pacientes',
-        route: '/admin/pacientes',
-        variant: 'outline',
-      },
-      {
-        label: 'Mi perfil',
-        route: '/perfil',
-        variant: 'ghost',
-      },
-    ],
   },
   patient: {
     subtitle: 'Revisa tus próximas reservas y controla tu historial clínico.',
@@ -135,23 +117,6 @@ export const dashboardConfig: Record<
         description: 'Centro Médico Vitacura',
         statusLabel: 'Debes confirmar tu hora',
         statusVariant: 'warning',
-      },
-    ],
-    actions: [
-      {
-        label: 'Nueva reserva',
-        route: '/reservar',
-        variant: 'primary',
-      },
-      {
-        label: 'Ver mis reservas',
-        route: '/mis-reservas',
-        variant: 'outline',
-      },
-      {
-        label: 'Mi perfil',
-        route: '/perfil',
-        variant: 'ghost',
       },
     ],
   },

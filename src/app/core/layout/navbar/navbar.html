@@ -1,0 +1,64 @@
+<nav
+        *ngIf="currentUser"
+        class="w-screen border-b border-[#0e245a]/5 bg-white/90 backdrop-blur sticky top-0 z-20"
+>
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+           <img src="/logos/isologo.svg" alt="MediReserva" class="w-8 h-auto"/>
+            <div class="flex flex-col leading-tight">
+        <span class="text-sm font-semibold text-[#0e245a]">
+          MediReserva
+        </span>
+                <span class="text-[0.7rem] text-[#0e245a]/60">
+          Panel {{ roleLabel.toLowerCase() }}
+        </span>
+            </div>
+        </div>
+
+        <div class="hidden md:flex items-center gap-4">
+            <a
+                    *ngFor="let link of links"
+                    [routerLink]="link.route"
+                    routerLinkActive="text-[#3469cd]"
+                    class="text-xs font-medium text-[#0e245a]/70 hover:text-[#3469cd] transition"
+            >
+                {{ link.label }}
+            </a>
+        </div>
+        <div class="flex items-center gap-3">
+            <div class="hidden sm:flex flex-col items-end">
+        <span class="text-xs font-medium text-[#0e245a]">
+          {{ currentUser?.name }} {{ currentUser?.lastName }}
+        </span>
+                <span class="text-[0.7rem] text-[#0e245a]/60">
+          {{ roleLabel }}
+        </span>
+            </div>
+            <button
+                    type="button"
+                    (click)="onLogout()"
+                    class="inline-flex items-center justify-center rounded-full border border-[#3469cd]/40 bg-white
+               px-3 py-1.5 text-[0.7rem] font-semibold text-[#3469cd]
+               hover:bg-[#3469cd]/5 active:scale-[0.98] transition"
+            >
+                Cerrar sesión
+            </button>
+        </div>
+    </div>
+
+    <div
+            *ngIf="links.length"
+            class="md:hidden border-t border-[#0e245a]/5 bg-white/95"
+    >
+        <div class="max-w-6xl mx-auto px-4 py-2 flex flex-wrap gap-3">
+            <a
+                    *ngFor="let link of links"
+                    [routerLink]="link.route"
+                    routerLinkActive="text-[#3469cd] bg-[#3469cd]/5"
+                    class="text-[0.7rem] font-medium text-[#0e245a]/70 hover:text-[#3469cd] px-2 py-1 rounded-full transition"
+            >
+                {{ link.label }}
+            </a>
+        </div>
+    </div>
+</nav>

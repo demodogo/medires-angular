@@ -8,9 +8,10 @@ import { Dashboard } from './features/dashboard/dashboard';
 import { ProfileModule } from './features/profile/profile-module';
 import { ReservasModule } from './features/reservas/reservas-module';
 import { ReservarModule } from './features/reservar/reservar-module';
+import { Navbar } from './core/layout/navbar/navbar';
 
 @NgModule({
-  declarations: [App, Dashboard],
+  declarations: [App, Dashboard, Navbar],
   imports: [BrowserModule, AppRoutingModule, AuthModule, ProfileModule, ReservasModule, ReservarModule],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],

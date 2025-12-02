@@ -88,12 +88,15 @@
                             {{ r.specialty }} con {{ r.doctor }}
                         </p>
                     </div>
-                    <span
-                            class="text-xs rounded-full px-3 py-1"
-                            [ngClass]="getStatusClasses(r.status)"
-                    >
-            {{ getStatusLabel(r.status) }}
-          </span>
+
+                    <div class="flex items-center gap-2">
+    <span
+            class="text-xs rounded-full px-3 py-1"
+            [ngClass]="getStatusClasses(r.status)"
+    >
+      {{ getStatusLabel(r.status) }}
+    </span>
+                    </div>
                 </div>
             </div>
 
