@@ -1,0 +1,129 @@
+<div class="min-h-screen flex items-center justify-center bg-[#f2f2f2] px-4">
+    <div class="max-w-5xl w-full grid gap-8 md:grid-cols-2 items-center">
+        <div class="hidden md:flex flex-col gap-6">
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 shadow-sm w-fit">
+                <span class="h-2 w-2 rounded-full bg-[#00d1d1]"></span>
+                <span class="text-xs font-medium text-[#0e245a] tracking-wide">
+          Plataforma de reservas médicas
+        </span>
+            </div>
+
+            <h1 class="text-3xl lg:text-4xl font-bold text-[#0e245a] leading-tight">
+                Bienvenid@ a <span class="text-[#3469cd]">MediReserva</span>
+            </h1>
+
+            <p class="text-sm text-[#0e245a]/70 leading-relaxed max-w-md">
+                Administra pacientes, agendas y reservas en un solo lugar.
+                Inicia sesión para acceder al panel de profesionales y comenzar tu jornada.
+            </p>
+
+            <div class="flex flex-wrap gap-3 text-xs text-[#0e245a]/70">
+                <div class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm">
+                    <span class="h-1.5 w-6 rounded-full bg-[#3469cd]"></span>
+                    <span>Agenda en tiempo real</span>
+                </div>
+                <div class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm">
+                    <span class="h-1.5 w-6 rounded-full bg-[#00d1d1]"></span>
+                    <span>Perfiles de pacientes</span>
+                </div>
+                <div class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm">
+                    <span class="h-1.5 w-6 rounded-full bg-[#0e245a]"></span>
+                    <span>Reportes de atención</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full">
+            <div class="bg-white rounded-2xl shadow-lg shadow-[#0e245a]/5 border border-[#3469cd]/10 p-6 sm:p-8">
+                <div class="mb-6 flex flex-col gap-2">
+                    <h2 class="text-2xl font-semibold text-[#0e245a]">
+                        Inicia sesión
+                    </h2>
+                    <p class="text-sm text-[#0e245a]/60">
+                        Ingresa tus credenciales para acceder al panel.
+                    </p>
+                </div>
+
+                <form class="flex flex-col gap-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-sm font-medium text-[#0e245a]" for="email">
+                            Correo electrónico
+                        </label>
+                        <div class="relative">
+                            <input
+                                    id="email"
+                                    formControlName="email"
+                                    type="email"
+                                    class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
+                       focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                                    placeholder="tucorreo@medireserva.cl"
+                            />
+                        </div>
+                        <p  *ngIf="email?.touched && email?.invalid"  class="text-xs text-red-500 mt-1">
+                          <span *ngIf="email?.errors?.['required']">
+                            El correo es obligatorio.
+                          </span>
+                          <span *ngIf="email?.errors?.['email']">
+                            Ingresa un correo válido.
+                          </span>
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-sm font-medium text-[#0e245a]" for="password">
+                            Contraseña
+                        </label>
+                        <div class="relative">
+                            <input
+                                    id="password"
+                                    formControlName="password"
+                                    type="password"
+                                    class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
+                       focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                                    placeholder="••••••••"
+                            />
+                        </div>
+                        <p  *ngIf="password?.touched && password?.invalid" class="text-xs text-red-500 mt-1">
+                            La contraseña es obligatoria.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-3 text-xs">
+                        <label class="inline-flex items-center gap-2 text-[#0e245a]/70">
+                            <input
+                                    type="checkbox"
+                                    class="h-4 w-4 rounded border-[#0e245a]/20 text-[#3469cd]
+                       focus:ring-[#3469cd]/30"
+                            />
+                            <span>Recordar sesión en este equipo</span>
+                        </label>
+                        <button
+                                type="button"
+                                class="text-[#3469cd] hover:text-[#233b8c] font-medium">
+                            ¿Olvidaste tu contraseña?
+                        </button>
+                    </div>
+
+                    <button
+                            type="submit"
+                            [disabled]="isSubmitting || loginForm.invalid"
+                            class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl
+                   bg-gradient-to-r from-[#3469cd] to-[#00d1d1]
+                   px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#3469cd]/30
+                   hover:shadow-lg hover:brightness-105 active:scale-[0.99] transition">
+                        <span *ngIf="!isSubmitting">Ingresar al panel</span>
+                        <span *ngIf="isSubmitting">Ingresando...</span>
+                    </button>
+
+                    <p *ngIf="loginError" class="mt-2 text-xs text-red-500">
+                        {{ loginError }}
+                    </p>
+                </form>
+
+                <div class="mt-6 border-t border-[#0e245a]/5 pt-4 text-[11px] text-[#0e245a]/55 flex items-center justify-between gap-2">
+                    <span>© {{ currentYear }} MediReserva</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
