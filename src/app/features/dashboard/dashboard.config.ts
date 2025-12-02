@@ -1,5 +1,11 @@
 import { Role } from '@/app/core/models/user.model';
 
+export type DashboardCardType = {
+  title: string;
+  value: string | number;
+  description: string;
+};
+
 export type AppointmentStatusVariant = 'success' | 'info' | 'warning' | 'danger';
 
 type AppointmentItem = {
@@ -12,22 +18,12 @@ type AppointmentItem = {
 
 export type ActionVariant = 'primary' | 'outline' | 'ghost';
 
-type DashboardAction = {
-  label: string;
-  route: string;
-  variant: ActionVariant;
-};
-
 export const dashboardConfig: Record<
   Role,
   {
     subtitle: string;
     welcome: string;
-    cards: Array<{
-      title: string;
-      value: string | number;
-      description: string;
-    }>;
+    cards: DashboardCardType[];
     appointmentsTitle: string;
     appointmentsLabel: string;
     appointments: AppointmentItem[];

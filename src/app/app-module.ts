@@ -4,15 +4,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { AuthModule } from './features/auth/auth-module';
-import { Dashboard } from './features/dashboard/dashboard';
 import { ProfileModule } from './features/profile/profile-module';
 import { ReservasModule } from './features/reservas/reservas-module';
 import { ReservarModule } from './features/reservar/reservar-module';
 import { Navbar } from './core/layout/navbar/navbar';
+import { DashboardModule } from '@/app/features/dashboard/dashboard.module';
+import { SharedModule } from '@/app/shared/shared.module';
 
 @NgModule({
-  declarations: [App, Dashboard, Navbar],
-  imports: [BrowserModule, AppRoutingModule, AuthModule, ProfileModule, ReservasModule, ReservarModule],
+  declarations: [App, Navbar],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AuthModule,
+    ProfileModule,
+    ReservasModule,
+    ReservarModule,
+    DashboardModule,
+    SharedModule,
+  ],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
 })
