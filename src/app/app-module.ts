@@ -10,6 +10,7 @@ import { ReservarModule } from './features/reservar/reservar-module';
 import { Navbar } from './core/layout/navbar/navbar';
 import { DashboardModule } from '@/app/features/dashboard/dashboard.module';
 import { SharedModule } from '@/app/shared/shared.module';
+import { PacientesModule } from '@/app/features/pacientes/pacientes/pacientes.module';
 
 @NgModule({
   declarations: [App, Navbar],
@@ -22,6 +23,7 @@ import { SharedModule } from '@/app/shared/shared.module';
     ReservarModule,
     DashboardModule,
     SharedModule,
+    PacientesModule,
   ],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],

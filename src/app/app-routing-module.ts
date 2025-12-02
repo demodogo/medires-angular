@@ -8,6 +8,7 @@ import { Profile } from '@/app/features/profile/profile';
 import { MisReservas } from '@/app/features/reservas/mis-reservas/mis-reservas';
 import { roleGuard } from '@/app/core/guards/role-guard';
 import { Reservar } from '@/app/features/reservar/reservar/reservar';
+import { Pacientes } from '@/app/features/pacientes/pacientes/pacientes';
 
 const routes: Routes = [
   {
@@ -29,6 +30,11 @@ const routes: Routes = [
     path: 'perfil',
     component: Profile,
     canActivate: [authGuard],
+  },
+  {
+    path: 'admin/pacientes',
+    component: Pacientes,
+    canActivate: [authGuard, roleGuard('admin')],
   },
   {
     path: 'mis-reservas',
