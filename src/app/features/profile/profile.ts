@@ -24,13 +24,16 @@ export class Profile {
   ) {}
 
   ngOnInit(): void {
-    this.profileForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: [''],
-      passwordRepeat: [''],
-    });
+    this.profileForm = this.fb.group(
+      {
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        lastName: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [this.passwordValidator]],
+        passwordRepeat: [''],
+      },
+      { validators: this.passwordsMatchValidator },
+    );
 
     this.sub = this.auth.currentUser$.subscribe((user) => {
       this.currentUser = user;
@@ -64,11 +67,6 @@ export class Profile {
   onSubmit(): void {
     if (this.profileForm.invalid || !this.currentUser) return;
 
-    if (this.profileForm.value.password !== this.profileForm.value.passwordRepeat) {
-      this.saveMessage = 'Las contraseñas no coinciden';
-      return;
-    }
-
     const updatedUser = {
       ...this.currentUser,
       name: this.profileForm.value.name,
@@ -78,5 +76,48 @@ export class Profile {
 
     this.auth.updateCurrentUser(updatedUser);
     this.saveMessage = 'Perfil actualizado correctamente';
+  }
+
+  passwordValidator(control: any) {
+    if (!control.value) return null;
+    const password = control.value;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSymbol = /[^A-Za-z0-9]/.test(password);
+
+    if (hasUpperCase && hasLowerCase && hasNumber && hasSymbol) {
+      return null;
+    } else {
+      return { invalidPassword: true };
+    }
+  }
+  private passwordsMatchValidator(group: any) {
+    const pwd = group.get('password')?.value;
+    const repeatCtrl = group.get('passwordRepeat');
+    const repeat = repeatCtrl?.value;
+
+    const currentErrors = { ...(repeatCtrl.errors || {}) };
+
+    if (!pwd && !repeat) {
+      if (currentErrors['invalidRepeatPassword']) {
+        delete currentErrors['invalidRepeatPassword'];
+        repeatCtrl.setErrors(Object.keys(currentErrors).length ? currentErrors : null);
+      }
+      return null;
+    }
+    if (pwd && !repeat) {
+      repeatCtrl.setErrors({ ...currentErrors, invalidRepeatPassword: true });
+      return null;
+    }
+    if (pwd !== repeat) {
+      repeatCtrl.setErrors({ ...currentErrors, invalidRepeatPassword: true });
+      return null;
+    }
+    if (currentErrors['invalidRepeatPassword']) {
+      delete currentErrors['invalidRepeatPassword'];
+      repeatCtrl.setErrors(Object.keys(currentErrors).length ? currentErrors : null);
+    }
+    return null;
   }
 }

@@ -34,14 +34,6 @@ export class Dashboard implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
-  get isAdmin(): boolean {
-    return this.currentUser?.role === 'admin';
-  }
-
-  get isPatient(): boolean {
-    return this.currentUser?.role === 'patient';
-  }
-
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/login']);
