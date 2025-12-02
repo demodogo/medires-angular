@@ -1,0 +1,83 @@
+<div class="min-h-screen bg-background px-4 py-8">
+    <div class="max-w-6xl mx-auto space-y-6">
+        <header class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="text-xs font-medium text-primary uppercase tracking-wide">
+                    Panel principal
+                </p>
+                <h1 class="text-2xl md:text-3xl font-bold text-foreground">
+                    {{ config?.welcome }}
+                </h1>
+                   <p>
+                       ¡Hola, {{currentUser?.name}} {{currentUser?.lastName}}!
+
+                   </p>
+                   <p class="text-sm text-foreground/70 mt-1">
+                       {{ config?.subtitle }}
+                   </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+                <a
+                        *ngFor="let action of actions"
+                        [routerLink]="action.route"
+                        [ngClass]="getActionClasses(action.variant)"
+                >
+                    {{ action.label }}
+                </a>
+            </div>
+        </header>
+        <section class="grid gap-4 md:grid-cols-3 mt-6">
+            <div
+                    *ngFor="let card of config?.cards"
+                    class="rounded-2xl bg-white  p-4 shadow-sm"
+            >
+                <p class="text-xs text-foreground">{{ card.title }}</p>
+                <p class="mt-2 text-3xl font-semibold text-foreground" >
+                    {{ card.value }}
+                </p>
+                <p class="text-xs text-[#0e245a]/50 mt-1">{{ card.description }}</p>
+            </div>
+        </section>
+        <section class="mt-4 rounded-2xl bg-white border border-[#3469cd]/10 p-4 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-[#0e245a]">
+                    {{ config?.appointmentsTitle }}
+                </h2>
+                <span class="text-xs text-[#0e245a]/60">{{ config?.appointmentsLabel }}</span>
+            </div>
+
+            <div class="divide-y divide-[#0e245a]/5 text-sm">
+                <div
+                        *ngFor="let item of config?.appointments"
+                        class="flex items-center justify-between py-2"
+                >
+                    <div>
+                        <p class="font-medium text-[#0e245a]">
+                            {{ item.time }} - {{ item.name }}
+                        </p>
+                        <p class="text-xs text-[#0e245a]/60">
+                            {{ item.description }}
+                        </p>
+                    </div>
+
+                    <span
+                            class="text-xs rounded-full px-3 py-1"
+                            [ngClass]="getStatusClass(item.statusVariant)"
+                    >
+        {{ item.statusLabel }}
+      </span>
+                </div>
+            </div>
+        </section>
+    </div>
+   <div class="flex w-full">
+       <button
+               type="button"
+               (click)="logout()"
+               class="inline-flex mt-12 ml-auto items-center gap-2 rounded-full border border-red-300 px-4 py-2 text-xs font-semibold text-slate-700 bg-red-200 hover:bg-red-300 hover:border-red-600 transition"
+       >
+           Cerrar sesión
+       </button>
+   </div>
+</div>
