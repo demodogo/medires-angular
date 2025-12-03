@@ -35,7 +35,7 @@ export const dashboardConfig: Record<
     cards: [
       {
         title: 'Atenciones de hoy',
-        value: 18,
+        value: 4,
         description: 'Pendientes del día: 3',
       },
       {

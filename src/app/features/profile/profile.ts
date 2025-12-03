@@ -4,6 +4,7 @@ import { Auth } from '@/app/core/services/auth/auth';
 import { Router } from '@angular/router';
 import { User } from '@/app/core/models/user.model';
 import { Subscription } from 'rxjs';
+import { passwordValidator } from '@/app/core/validators/password.validator';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,7 @@ export class Profile {
         name: ['', [Validators.required, Validators.minLength(3)]],
         lastName: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [this.passwordValidator]],
+        password: ['', [passwordValidator]],
         passwordRepeat: [''],
       },
       { validators: this.passwordsMatchValidator },
@@ -78,20 +79,6 @@ export class Profile {
     this.saveMessage = 'Perfil actualizado correctamente';
   }
 
-  passwordValidator(control: any) {
-    if (!control.value) return null;
-    const password = control.value;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumber = /[0-9]/.test(password);
-    const hasSymbol = /[^A-Za-z0-9]/.test(password);
-
-    if (hasUpperCase && hasLowerCase && hasNumber && hasSymbol) {
-      return null;
-    } else {
-      return { invalidPassword: true };
-    }
-  }
   private passwordsMatchValidator(group: any) {
     const pwd = group.get('password')?.value;
     const repeatCtrl = group.get('passwordRepeat');

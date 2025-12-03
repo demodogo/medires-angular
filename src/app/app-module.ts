@@ -11,9 +11,10 @@ import { Navbar } from './core/layout/navbar/navbar';
 import { DashboardModule } from '@/app/features/dashboard/dashboard.module';
 import { SharedModule } from '@/app/shared/shared.module';
 import { PacientesModule } from '@/app/features/pacientes/pacientes/pacientes.module';
+import { Agenda } from './features/agenda/agenda/agenda';
 
 @NgModule({
-  declarations: [App, Navbar],
+  declarations: [App, Navbar, Agenda],
   imports: [
     BrowserModule,
     AppRoutingModule,

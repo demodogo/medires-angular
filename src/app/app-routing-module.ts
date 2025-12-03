@@ -9,6 +9,9 @@ import { MisReservas } from '@/app/features/reservas/mis-reservas/mis-reservas';
 import { roleGuard } from '@/app/core/guards/role-guard';
 import { Reservar } from '@/app/features/reservar/reservar/reservar';
 import { Pacientes } from '@/app/features/pacientes/pacientes/pacientes';
+import { Agenda } from '@/app/features/agenda/agenda/agenda';
+import { RecuperarContrasena } from '@/app/features/auth/recuperar-contrasena/recuperar-contrasena';
+import { Register } from '@/app/features/auth/register/register';
 
 const routes: Routes = [
   {
@@ -32,6 +35,11 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'registro',
+    component: Register,
+    canActivate: [loginGuard],
+  },
+  {
     path: 'admin/pacientes',
     component: Pacientes,
     canActivate: [authGuard, roleGuard('admin')],
@@ -45,6 +53,16 @@ const routes: Routes = [
     path: 'reservar',
     component: Reservar,
     canActivate: [authGuard, roleGuard('patient')],
+  },
+  {
+    path: 'admin/agenda',
+    component: Agenda,
+    canActivate: [authGuard, roleGuard('admin')],
+  },
+  {
+    path: 'recuperar-contrasena',
+    component: RecuperarContrasena,
+    canActivate: [loginGuard],
   },
   {
     path: '**',

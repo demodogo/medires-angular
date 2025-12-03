@@ -53,9 +53,12 @@ export class Auth {
     return true;
   }
 
-  register(user: User): void {
-    this.currentUserSubject.next(user);
-    this.saveUserToLS(user);
+  register(user: Omit<User, 'id' | 'role'>, role: Role = 'patient'): User {
+    const nextId = Math.floor(Math.random() * 1000000);
+    const newUser = { ...user, id: nextId, role };
+    this.currentUserSubject.next(newUser);
+    this.saveUserToLS(newUser);
+    return newUser;
   }
 
   updateCurrentUser(updatedUser: User): void {
