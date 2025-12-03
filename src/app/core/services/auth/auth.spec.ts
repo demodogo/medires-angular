@@ -13,4 +13,9 @@ describe('Auth', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should login with valid creds', () => {
+    const ok = service.login('admin@email.cl', 'admin123');
+    expect(ok).toBeTruthy();
+  });
 });

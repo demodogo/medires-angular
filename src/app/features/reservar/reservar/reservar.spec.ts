@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Reservar } from './reservar';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('Reservar', () => {
   let component: Reservar;
@@ -8,9 +9,9 @@ describe('Reservar', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Reservar]
-    })
-    .compileComponents();
+      declarations: [Reservar],
+      imports: [ReactiveFormsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Reservar);
     component = fixture.componentInstance;
@@ -19,5 +20,11 @@ describe('Reservar', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should reject past date', () => {
+    const formDate = component.date;
+    formDate?.setValue('2022-01-01');
+    expect(formDate?.hasError('pastDate')).toBeTrue();
   });
 });

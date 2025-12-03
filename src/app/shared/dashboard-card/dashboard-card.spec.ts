@@ -8,12 +8,16 @@ describe('DashboardCard', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardCard]
-    })
-    .compileComponents();
+      declarations: [DashboardCard],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardCard);
     component = fixture.componentInstance;
+    component.card = {
+      title: 'Test Title',
+      value: 'Test Value',
+      description: 'Test Description',
+    };
     await fixture.whenStable();
   });
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Profile } from './profile';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('Profile', () => {
   let component: Profile;
@@ -8,9 +9,9 @@ describe('Profile', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Profile]
-    })
-    .compileComponents();
+      declarations: [Profile],
+      imports: [ReactiveFormsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Profile);
     component = fixture.componentInstance;
@@ -19,5 +20,11 @@ describe('Profile', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should validate email format', () => {
+    const email = component.email;
+    email?.setValue('email-invalido');
+    expect(email?.hasError('email')).toBeTrue();
   });
 });
