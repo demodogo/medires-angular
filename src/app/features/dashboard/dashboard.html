@@ -22,27 +22,27 @@
                 <p class="mt-2 text-3xl font-semibold text-foreground" >
                     {{ card.value }}
                 </p>
-                <p class="text-xs text-[#0e245a]/50 mt-1">{{ card.description }}</p>
+                <p class="text-xs text-foreground/50 mt-1">{{ card.description }}</p>
             </div>
         </section>
-        <section class="mt-4 rounded-2xl bg-white border border-[#3469cd]/10 p-4 shadow-sm">
+        <section class="mt-4 rounded-2xl bg-white border border-primary/10 p-4 shadow-sm">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-sm font-semibold text-[#0e245a]">
+                <h2 class="text-sm font-semibold text-foreground">
                     {{ config?.appointmentsTitle }}
                 </h2>
-                <span class="text-xs text-[#0e245a]/60">{{ config?.appointmentsLabel }}</span>
+                <span class="text-xs text-foreground/60">{{ config?.appointmentsLabel }}</span>
             </div>
 
-            <div class="divide-y divide-[#0e245a]/5 text-sm">
+            <div class="divide-y divide-foreground/5 text-sm">
                 <div
                         *ngFor="let item of config?.appointments"
                         class="flex items-center justify-between py-2"
                 >
                     <div>
-                        <p class="font-medium text-[#0e245a]">
+                        <p class="font-medium text-foreground">
                             {{ item.time }} - {{ item.name }}
                         </p>
-                        <p class="text-xs text-[#0e245a]/60">
+                        <p class="text-xs text-foreground/60">
                             {{ item.description }}
                         </p>
                     </div>

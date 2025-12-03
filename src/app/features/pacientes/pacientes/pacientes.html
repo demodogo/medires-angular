@@ -1,25 +1,25 @@
 <main class="max-w-6xl mx-auto px-4 pt-8 pb-12">
     <header class="flex flex-col gap-2 mb-6">
-        <h1 class="text-xl font-semibold text-[#0e245a]">
+        <h1 class="text-xl font-semibold text-foreground">
             Tus pacientes
         </h1>
-        <p class="text-sm text-[#0e245a]/70">
+        <p class="text-sm text-foreground/70">
             Administra la información básica de los pacientes.
         </p>
     </header>
 
     <section class="grid gap-6 md:grid-cols-[2fr,1.2fr]">
-        <div class="rounded-2xl bg-white border border-[#3469cd]/10 shadow-sm overflow-hidden">
-            <div class="px-4 py-3 border-b border-[#0e245a]/5 flex items-center justify-between">
-                <h2 class="text-sm font-semibold text-[#0e245a]">Listado de pacientes</h2>
-                <span class="text-xs text-[#0e245a]/60">
+        <div class="rounded-2xl bg-white border border-primary/10 shadow-sm overflow-hidden">
+            <div class="px-4 py-3 border-b border-foreground/5 flex items-center justify-between">
+                <h2 class="text-sm font-semibold text-foreground">Listado de pacientes</h2>
+                <span class="text-xs text-foreground/60">
           Total: {{ patients.length }}
         </span>
             </div>
 
             <div class="overflow-x-auto">
                 <table class="min-w-full text-sm">
-                    <thead class="bg-[#f9fafb] text-[#0e245a]/70 text-xs uppercase tracking-wide">
+                    <thead class="bg-[#f9fafb] text-foreground/70 text-xs uppercase tracking-wide">
                     <tr>
                         <th class="px-4 py-2 text-left">Nombre</th>
                         <th class="px-4 py-2 text-left">RUT</th>
@@ -30,17 +30,17 @@
                     <tbody>
                     <tr
                             *ngFor="let p of patients"
-                            class="border-t border-[#0e245a]/5"
+                            class="border-t border-foreground/5"
                     >
                         <td class="px-4 py-2">
                             <div class="flex flex-col">
-                  <span class="font-medium text-[#0e245a]">
+                  <span class="font-medium text-foreground">
                     {{ p.name }} {{ p.lastName }}
                   </span>
 
                             </div>
                         </td>
-                        <td class="px-4 py-2 text-xs text-[#0e245a]/80">
+                        <td class="px-4 py-2 text-xs text-foreground/80">
                             {{ p.rut }}
                         </td>
 
@@ -48,8 +48,8 @@
                 <span
                         class="inline-flex items-center rounded-full px-2.5 py-1 text-[0.7rem] font-medium"
                         [ngClass]="p.isActive
-                    ? 'bg-[#00d1d1]/10 text-[#00d1d1]'
-                    : 'bg-gray-200 text-gray-600'"
+                    ? 'bg-accent/10 border text-[#3a8080]/80'
+                    : 'bg-gray-200 border text-gray-600'"
                 >
                   {{ p.isActive ? 'Activo' : 'Inactivo' }}
                 </span>
@@ -58,7 +58,7 @@
                             <div class="inline-flex items-center gap-2">
                                 <button
                                         type="button"
-                                        class="text-xs text-[#3469cd] hover:underline"
+                                        class="text-xs text-primary hover:underline"
                                         (click)="edit(p)"
                                 >
                                     Editar
@@ -75,7 +75,7 @@
                     </tr>
 
                     <tr *ngIf="!patients.length">
-                        <td colspan="5" class="px-4 py-6 text-center text-xs text-[#0e245a]/60">
+                        <td colspan="5" class="px-4 py-6 text-center text-xs text-foreground/60">
                             No hay pacientes registrados.
                         </td>
                     </tr>
@@ -84,24 +84,24 @@
             </div>
         </div>
 
-        <div class="rounded-2xl bg-white border border-[#3469cd]/10 shadow-sm p-4 max-w-xl">
-            <h2 class="text-sm font-semibold text-[#0e245a] mb-2">
+        <div class="rounded-2xl bg-white border border-primary/10 shadow-sm p-4 max-w-xl">
+            <h2 class="text-sm font-semibold text-foreground mb-2">
                 {{ editingId ? 'Editar paciente' : 'Nuevo paciente' }}
             </h2>
-            <p class="text-[0.75rem] text-[#0e245a]/60 mb-4">
+            <p class="text-[0.75rem] text-foreground/60 mb-4">
                 Completa los datos básicos del paciente.
             </p>
 
             <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-3">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-xl">
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-xs font-medium text-[#0e245a]">RUT</label>
+                        <label class="text-xs font-medium text-foreground">RUT</label>
                         <input
                                 type="text"
                                 formControlName="rut"
                                 (input)="onRutInput($event)"
-                                class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2 text-sm outline-none
-                     focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20"
+                                class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2 text-sm outline-none
+                     focus:border-primary focus:ring-2 focus:ring-primary/20"
                         />
                         <p *ngIf="rut?.touched && (rut?.invalid || rut?.errors?.['invalidRut'])" class="text-[0.7rem] text-red-500">
                             RUT inválido
@@ -109,12 +109,12 @@
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-xs font-medium text-[#0e245a]">Nombre</label>
+                        <label class="text-xs font-medium text-foreground">Nombre</label>
                         <input
                                 type="text"
                                 formControlName="name"
-                                class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2 text-sm outline-none
-                     focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20"
+                                class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2 text-sm outline-none
+                     focus:border-primary focus:ring-2 focus:ring-primary/20"
                         />
                         <p *ngIf="name?.touched && name?.invalid" class="text-[0.7rem] text-red-500">
                             El nombre es obligatorio.
@@ -122,12 +122,12 @@
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-xs font-medium text-[#0e245a]">Apellido</label>
+                        <label class="text-xs font-medium text-foreground">Apellido</label>
                         <input
                                 type="text"
                                 formControlName="lastName"
-                                class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2 text-sm outline-none
-                     focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20"
+                                class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2 text-sm outline-none
+                     focus:border-primary focus:ring-2 focus:ring-primary/20"
                         />
                         <p *ngIf="lastName?.touched && lastName?.invalid" class="text-[0.7rem] text-red-500">
                             El apellido es obligatorio.
@@ -135,8 +135,8 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-between mt-2">
-                    <label class="flex items-center gap-2 text-xs text-[#0e245a]">
-                        <input type="checkbox" formControlName="isActive" class="rounded border-[#0e245a]/30" />
+                    <label class="flex items-center gap-2 text-xs text-foreground">
+                        <input type="checkbox" formControlName="isActive" class="rounded border-foreground/30" />
                         <span>Mantener paciente activo</span>
                     </label>
 
@@ -152,7 +152,7 @@
 
                         <button
                                 type="submit"
-                                class="text-xs rounded-full bg-[#3469cd] px-4 py-1.5 font-semibold text-white
+                                class="text-xs rounded-full bg-primary px-4 py-1.5 font-semibold text-white
                      hover:brightness-110"
                         >
                             {{ editingId ? 'Guardar cambios' : 'Crear paciente' }}

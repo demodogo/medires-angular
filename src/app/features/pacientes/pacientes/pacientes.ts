@@ -31,7 +31,6 @@ export class Pacientes implements OnInit, OnDestroy {
     });
 
     this.sub = this.patientsService.patients$.subscribe((list) => {
-      console.log('Lista de pacientes recibida:', list);
       this.patients = list;
     });
   }

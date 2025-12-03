@@ -2,31 +2,31 @@
     <div class="max-w-5xl w-full grid gap-8 md:grid-cols-2 items-center">
         <div class="hidden md:flex flex-col gap-6">
             <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 shadow-sm w-fit">
-                <span class="h-2 w-2 rounded-full bg-[#00d1d1]"></span>
-                <span class="text-xs font-medium text-[#0e245a] tracking-wide">
+                <span class="h-2 w-2 rounded-full bg-accent"></span>
+                <span class="text-xs font-medium text-foreground tracking-wide">
           Plataforma de reservas médicas
         </span>
             </div>
 
-            <h1 class="text-3xl lg:text-4xl font-bold text-[#0e245a] leading-tight">
-                Bienvenid@ a <span class="text-[#3469cd]">MediReserva</span>
+            <h1 class="text-3xl lg:text-4xl font-bold text-foreground leading-tight">
+                Bienvenid@ a <span class="text-primary">MediReserva</span>
             </h1>
 
-            <p class="text-sm text-[#0e245a]/70 leading-relaxed max-w-md">
+            <p class="text-sm text-foreground/70 leading-relaxed max-w-md">
                 Administra tu agenda médica y reservas en un solo lugar.
             </p>
 
-            <div class="flex flex-wrap gap-3 text-xs text-[#0e245a]/70">
+            <div class="flex flex-wrap gap-3 text-xs text-foreground/70">
                 <div class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm">
-                    <span class="h-1.5 w-6 rounded-full bg-[#3469cd]"></span>
+                    <span class="h-1.5 w-6 rounded-full bg-primary"></span>
                     <span>Agenda en tiempo real</span>
                 </div>
                 <div class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm">
-                    <span class="h-1.5 w-6 rounded-full bg-[#00d1d1]"></span>
+                    <span class="h-1.5 w-6 rounded-full bg-accent"></span>
                     <span>Perfiles de pacientes</span>
                 </div>
                 <div class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm">
-                    <span class="h-1.5 w-6 rounded-full bg-[#0e245a]"></span>
+                    <span class="h-1.5 w-6 rounded-full bg-foreground"></span>
                     <span>Reportes de atención</span>
                 </div>
             </div>
@@ -34,19 +34,19 @@
 
         <div class="w-full">
             <img src="/logos/isologo.svg" alt="MediReserva" class="w-24 h-auto mx-auto my-4" />
-            <div class="bg-white rounded-2xl shadow-lg shadow-[#0e245a]/5 border border-[#3469cd]/10 p-6 sm:p-8">
+            <div class="bg-white rounded-2xl shadow-lg shadow-foreground/5 border border-primary/10 p-6 sm:p-8">
                 <div class="mb-6 flex flex-col gap-2">
-                    <h2 class="text-2xl font-semibold text-[#0e245a]">
+                    <h2 class="text-2xl font-semibold text-foreground">
                         Inicia sesión
                     </h2>
-                    <p class="text-sm text-[#0e245a]/60">
+                    <p class="text-sm text-foreground/60">
                         Ingresa tus credenciales para acceder al panel.
                     </p>
                 </div>
 
                 <form class="flex flex-col gap-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-sm font-medium text-[#0e245a]" for="email">
+                        <label class="text-sm font-medium text-foreground" for="email">
                             Correo electrónico
                         </label>
                         <div class="relative">
@@ -54,8 +54,8 @@
                                     id="email"
                                     formControlName="email"
                                     type="email"
-                                    class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
-                       focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                                    class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-foreground outline-none
+                       focus:border-primary focus:ring-2 focus:ring-primary/20 transition"
                                     placeholder="tucorreo@medireserva.cl"
                             />
                         </div>
@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-sm font-medium text-[#0e245a]" for="password">
+                        <label class="text-sm font-medium text-foreground" for="password">
                             Contraseña
                         </label>
                         <div class="relative">
@@ -78,8 +78,8 @@
                                     id="password"
                                     formControlName="password"
                                     type="password"
-                                    class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
-                       focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                                    class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-foreground outline-none
+                       focus:border-primary focus:ring-2 focus:ring-primary/20 transition"
                                     placeholder="••••••••"
                             />
                         </div>
@@ -89,17 +89,17 @@
                     </div>
 
                     <div class="flex items-center justify-between gap-3 text-xs">
-                        <label class="inline-flex items-center gap-2 text-[#0e245a]/70">
+                        <label class="inline-flex items-center gap-2 text-foreground/70">
                             <input
                                     type="checkbox"
-                                    class="h-4 w-4 rounded border-[#0e245a]/20 text-[#3469cd]
-                       focus:ring-[#3469cd]/30"
+                                    class="h-4 w-4 rounded border-foreground/20 text-primary
+                       focus:ring-primary/30"
                             />
                             <span>Recordar sesión en este equipo</span>
                         </label>
                         <button
                                 type="button"
-                                class="text-[#3469cd] hover:text-[#233b8c] font-medium">
+                                class="text-primary hover:text-[#233b8c] font-medium">
                             ¿Olvidaste tu contraseña?
                         </button>
                     </div>
@@ -108,9 +108,9 @@
                             type="submit"
                             [disabled]="isSubmitting || loginForm.invalid"
                             class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl
-                   bg-gradient-to-r from-[#3469cd] to-[#00d1d1]
-                   px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#3469cd]/30
-                   hover:shadow-lg hover:brightness-105 active:scale-[0.99] transition">
+                   bg-gradient-to-r from-primary to-accent
+                   px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-primary/30
+                   hover:shadow-lg hover:brightness-105 active:scale-[0.99] transition ">
                         <span *ngIf="!isSubmitting">Ingresar al panel</span>
                         <span *ngIf="isSubmitting">Ingresando...</span>
                     </button>
@@ -120,7 +120,7 @@
                     </p>
                 </form>
 
-                <div class="mt-6 border-t border-[#0e245a]/5 pt-4 text-[11px] text-[#0e245a]/55 flex items-center justify-between gap-2">
+                <div class="mt-6 border-t border-foreground/5 pt-4 text-[11px] text-foreground/55 flex items-center justify-between gap-2">
                     <span>© {{ currentYear }} MediReserva</span>
                 </div>
             </div>

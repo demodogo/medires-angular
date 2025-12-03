@@ -2,27 +2,27 @@
     <div class="max-w-3xl mx-auto space-y-6">
         <div class="flex items-center justify-between gap-4">
             <div>
-                <p class="text-xs font-medium text-[#3469cd] uppercase tracking-wide">
+                <p class="text-xs font-medium text-primary uppercase tracking-wide">
                     Reservas
                 </p>
-                <h1 class="text-2xl font-bold text-[#0e245a]">
+                <h1 class="text-2xl font-bold text-foreground">
                     Nueva reserva
                 </h1>
-                <p class="text-sm text-[#0e245a]/70 mt-1">
+                <p class="text-sm text-foreground/70 mt-1">
                     Selecciona la fecha, hora y profesional para tu próxima atención.
                 </p>
             </div>
 
             <a
                     routerLink="/dashboard"
-                    class="text-xs font-medium text-[#3469cd] hover:underline"
+                    class="text-xs font-medium text-primary hover:underline"
             >
                 Volver al dashboard
             </a>
         </div>
 
         <div
-                class="bg-white rounded-2xl shadow-lg shadow-[#0e245a]/5 border border-[#3469cd]/10 p-6 sm:p-8"
+                class="bg-white rounded-2xl shadow-lg shadow-foreground/5 border border-primary/10 p-6 sm:p-8"
         >
             <ng-container *ngIf="!lastReservation; else reservationSummary">
                 <form
@@ -31,15 +31,15 @@
                         class="space-y-4"
                 >
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-sm font-medium text-[#0e245a]" for="date">
+                        <label class="text-sm font-medium text-foreground" for="date">
                             Fecha
                         </label>
                         <input
                                 id="date"
                                 type="date"
                                 formControlName="date"
-                                class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
-                     focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                                class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-foreground outline-none
+                     focus:border-primary focus:ring-2 focus:ring-primary/20 transition"
                         />
                         <p
                                 *ngIf="date?.touched && date?.errors?.['required']"
@@ -55,15 +55,15 @@
                         </p>
                     </div>
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-sm font-medium text-[#0e245a]" for="time">
+                        <label class="text-sm font-medium text-foreground" for="time">
                             Hora
                         </label>
                         <input
                                 id="time"
                                 type="time"
                                 formControlName="time"
-                                class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
-                     focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                                class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-foreground outline-none
+                     focus:border-primary focus:ring-2 focus:ring-primary/20 transition"
                         />
                         <p
                                 *ngIf="time?.touched && time?.invalid"
@@ -73,15 +73,15 @@
                         </p>
                     </div>
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-sm font-medium text-[#0e245a]" for="specialty">
+                        <label class="text-sm font-medium text-foreground" for="specialty">
                             Especialidad
                         </label>
                         <select
                                 id="specialty"
                                 formControlName="specialty"
                                 (change)="onSpecialtyChange()"
-                                class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
-                     focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                                class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-foreground outline-none
+                     focus:border-primary focus:ring-2 focus:ring-primary/20 transition"
                         >
                             <option [ngValue]="null" disabled>Selecciona una especialidad</option>
                             <option
@@ -99,15 +99,15 @@
                         </p>
                     </div>
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-sm font-medium text-[#0e245a]" for="doctor">
+                        <label class="text-sm font-medium text-foreground" for="doctor">
                             Profesional
                         </label>
                         <select
                                 id="doctorId"
                                 formControlName="doctorId"
                                 (change)="onDoctorChange()"
-                                class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
-                     focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition"
+                                class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-foreground outline-none
+                     focus:border-primary focus:ring-2 focus:ring-primary/20 transition"
                                 [disabled]="!doctorsForSelected.length"
                         >
                             <option [ngValue]="null" disabled>
@@ -128,15 +128,15 @@
                         </p>
                     </div>
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-sm font-medium text-[#0e245a]" for="reason">
+                        <label class="text-sm font-medium text-foreground" for="reason">
                             Motivo de la consulta
                         </label>
                         <textarea
                                 id="reason"
                                 formControlName="reason"
                                 rows="3"
-                                class="w-full rounded-xl border border-[#0e245a]/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-[#0e245a] outline-none
-                     focus:border-[#3469cd] focus:ring-2 focus:ring-[#3469cd]/20 transition resize-none"
+                                class="w-full rounded-xl border border-foreground/10 bg-[#f9fafb] px-3 py-2.5 text-sm text-foreground outline-none
+                     focus:border-primary focus:ring-2 focus:ring-primary/20 transition resize-none"
                                 placeholder="Opcional, pero ayuda al profesional a prepararse"
                         ></textarea>
                     </div>
@@ -145,15 +145,15 @@
                         <button
                                 type="submit"
                                 class="inline-flex items-center justify-center gap-2 rounded-xl
-                     bg-gradient-to-r from-[#3469cd] to-[#00d1d1]
-                     px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#3469cd]/30
+                     bg-gradient-to-r from-primary to-accent
+                     px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-primary/30
                      hover:shadow-lg hover:brightness-105 active:scale-[0.99] transition
                      disabled:opacity-60 disabled:cursor-not-allowed"
                         >
                             Confirmar reserva
                         </button>
 
-                        <p *ngIf="successMessage" class="text-xs text-[#0e245a]/70">
+                        <p *ngIf="successMessage" class="text-xs text-foreground/70">
                             {{ successMessage }}
                         </p>
                     </div>
@@ -163,15 +163,15 @@
             <ng-template #reservationSummary>
                 <div class="space-y-4" *ngIf="lastReservation as r">
                     <div>
-                        <h2 class="text-lg font-semibold text-[#0e245a]">
+                        <h2 class="text-lg font-semibold text-foreground">
                             Reserva confirmada
                         </h2>
-                        <p class="text-sm text-[#0e245a]/70 mt-1">
+                        <p class="text-sm text-foreground/70 mt-1">
                             Estos son los datos de tu reserva:
                         </p>
                     </div>
 
-                    <div class="space-y-2 text-sm text-[#0e245a]">
+                    <div class="space-y-2 text-sm text-foreground">
                         <p>
                             <span class="font-medium">Paciente:</span>
                             {{ r.patientName }}
@@ -199,15 +199,15 @@
                                 type="button"
                                 (click)="resetForm()"
                                 class="inline-flex items-center justify-center gap-2 rounded-xl
-                     border border-[#3469cd]/40 bg-white text-[#3469cd]
-                     px-4 py-2.5 text-sm font-semibold hover:bg-[#3469cd]/5 transition"
+                     border border-primary/40 bg-white text-primary
+                     px-4 py-2.5 text-sm font-semibold hover:bg-primary/5 transition"
                         >
                             Realizar otra reserva
                         </button>
 
                         <a
                                 routerLink="/mis-reservas"
-                                class="text-xs font-medium text-[#3469cd] hover:underline"
+                                class="text-xs font-medium text-primary hover:underline"
                         >
                             Ver mis reservas
                         </a>
